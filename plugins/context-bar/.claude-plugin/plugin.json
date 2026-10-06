@@ -1,0 +1,16 @@
+{
+  "name": "context-bar",
+  "version": "0.1.0",
+  "description": "Draws the context window as a stacked bar above the prompt, one colour per /context category; /context-bar toggles it",
+  "types": "./types/index.d.ts",
+  "author": {
+    "name": "artemisia-absynthium",
+    "url": "https://github.com/artemisia-absynthium"
+  },
+  "homepage": "https://github.com/penso-technology/claude-plugins/tree/main/plugins/context-bar",
+  "keywords": [
+    "context",
+    "status",
+    "ui"
+  ]
+}

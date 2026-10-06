@@ -1,0 +1,15 @@
+{
+  "name": "penso-plugins",
+  "description": "Claude Code plugins by penso-technology: live UI mods and hooks.",
+  "owner": {
+    "name": "penso-technology",
+    "url": "https://github.com/penso-technology"
+  },
+  "plugins": [
+    {
+      "name": "context-bar",
+      "source": "./plugins/context-bar",
+      "description": "Draws the context window as a stacked bar above the prompt, one colour per /context category; /context-bar toggles it."
+    }
+  ]
+}
