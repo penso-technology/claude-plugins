@@ -50,3 +50,7 @@ claude --plugin-dir plugins/<name>
 ```
 
 The folder is watched: saving a file hot-reloads the hooks module in that session.
+
+## License
+
+[MIT](LICENSE), Penso Technology S.r.l.
