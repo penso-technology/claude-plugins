@@ -1,0 +1,16 @@
+{
+  "name": "model-limits",
+  "version": "0.1.0",
+  "description": "Publishes the per-model weekly rate-limit windows (Fable, ...) to ~/.claude/model-limits.json for a status line script to draw",
+  "types": "./types/index.d.ts",
+  "author": {
+    "name": "artemisia-absynthium",
+    "url": "https://github.com/artemisia-absynthium"
+  },
+  "homepage": "https://github.com/penso-technology/claude-plugins/tree/main/plugins/model-limits",
+  "keywords": [
+    "usage",
+    "rate-limit",
+    "status"
+  ]
+}
