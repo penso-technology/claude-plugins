@@ -10,6 +10,11 @@
       "name": "context-bar",
       "source": "./plugins/context-bar",
       "description": "Draws the context window as a stacked bar above the prompt, one colour per /context category; /context-bar toggles it."
+    },
+    {
+      "name": "model-limits",
+      "source": "./plugins/model-limits",
+      "description": "Publishes the per-model weekly rate-limit windows (Fable, ...) to ~/.claude/model-limits.json for a status line script to draw."
     }
   ]
 }
