@@ -1,0 +1,14 @@
+{
+  "name": "model-limits",
+  "version": "0.1.0",
+  "description": "Publishes the per-model weekly rate-limit windows (Fable, ...) to ~/.claude/model-limits.json for a status line script to draw",
+  "author": {
+    "name": "artemisia-absynthium",
+    "url": "https://github.com/artemisia-absynthium"
+  },
+  "keywords": [
+    "usage",
+    "rate-limit",
+    "status"
+  ]
+}

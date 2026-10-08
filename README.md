@@ -19,6 +19,7 @@ arrive with `claude plugin update context-bar` followed by `/reload-plugins`.
 | Plugin | What it does | Command |
 |--------|--------------|---------|
 | [`context-bar`](plugins/context-bar) | Draws the context window as a stacked bar above the prompt, one colour per `/context` category, with a legend of the used categories. | `/context-bar` toggles it |
+| [`model-limits`](plugins/model-limits) | Publishes the per-model weekly rate-limit windows (`Current week (Fable)` on `/usage`), which the status line's stdin lacks, to `~/.claude/model-limits.json` for a status line script to draw. | none; it writes the file at session start and after a turn whose rate-limit reading moved |
 
 ## Layout
 
@@ -27,7 +28,7 @@ arrive with `claude plugin update context-bar` followed by `/reload-plugins`.
 plugins/<name>/                   one plugin per folder
   .claude-plugin/plugin.json      manifest (name, version, description, author, types)
   hooks/hooks.json                { "modules": ["./register.tsx"] }
-  hooks/register.tsx              the hooks module
+  hooks/register.tsx              the hooks module (.ts where it draws nothing)
   types/index.d.ts                the plugin's $.state contract, when it keeps state
   tests/*.test.tsx                run by `claude plugin test`
 ```
