@@ -1,0 +1,16 @@
+{
+  "name": "agent-model-label",
+  "version": "0.1.0",
+  "description": "Appends the model a subagent runs on to its description, so the agent list above the prompt names it on the same line",
+  "types": "./types/index.d.ts",
+  "author": {
+    "name": "artemisia-absynthium",
+    "url": "https://github.com/artemisia-absynthium"
+  },
+  "homepage": "https://github.com/penso-technology/claude-plugins/tree/main/plugins/agent-model-label",
+  "keywords": [
+    "subagent",
+    "model",
+    "agents"
+  ]
+}
