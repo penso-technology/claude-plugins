@@ -1,13 +1,14 @@
 /**
- * The model id each agent type's own definition resolved to, keyed by
- * `subagentType`: learned from a spawn whose predicted model missed, since a
+ * The model each agent type's own definition resolved to, one member per
+ * `subagentType`, learned from a spawn whose predicted model missed: the
  * definition's `model` frontmatter is the one input an `agent.spawn` hook
- * cannot read.
+ * cannot read. The member is a model id, or `inherit` when the definition
+ * follows the parent, so a later `/model` switch does not stale it.
  */
-export type LearnedModels = Record<string, string>
+export type LearnedModel = string
 
 declare module 'claude-code' {
   interface PluginState {
-    'agent-model-label': { learned: LearnedModels }
+    'agent-model-label': { learned: StateFamily<LearnedModel> }
   }
 }
