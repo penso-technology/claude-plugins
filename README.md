@@ -20,6 +20,7 @@ arrive with `claude plugin update context-bar` followed by `/reload-plugins`.
 |--------|--------------|---------|
 | [`context-bar`](plugins/context-bar) | Draws the context window as a stacked bar above the prompt, one colour per `/context` category, with a legend of the used categories. | `/context-bar` toggles it |
 | [`model-limits`](plugins/model-limits) | Publishes the per-model weekly rate-limit windows (`Current week (Fable)` on `/usage`), which the status line's stdin lacks, to `~/.claude/model-limits.json` for a status line script to draw. | none; it writes the file at session start and after a turn whose rate-limit reading moved |
+| [`agent-model-label`](plugins/agent-model-label) | Appends the model a subagent runs on to its description, so the agent list above the prompt reads `Compiling report (fable 5.1)`; a definition's own model is learned from the first spawn and toasted. | none; every spawn is labelled |
 
 ## Layout
 

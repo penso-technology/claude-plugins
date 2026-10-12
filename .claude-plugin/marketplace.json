@@ -15,6 +15,11 @@
       "name": "model-limits",
       "source": "./plugins/model-limits",
       "description": "Publishes the per-model weekly rate-limit windows (Fable, ...) to ~/.claude/model-limits.json for a status line script to draw."
+    },
+    {
+      "name": "agent-model-label",
+      "source": "./plugins/agent-model-label",
+      "description": "Appends the model a subagent runs on to its description, so the agent list above the prompt names it on the same line."
     }
   ]
 }
