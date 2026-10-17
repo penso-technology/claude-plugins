@@ -1,0 +1,29 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/record-touched.sh",
+            "timeout": 10,
+            "statusMessage": "Recording touched plugins for the verification gate"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/gate-on-stop.sh",
+            "timeout": 180,
+            "statusMessage": "Verification gate: id check, claude plugin validate, tests of touched plugins"
+          }
+        ]
+      }
+    ]
+  }
+}
