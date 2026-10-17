@@ -13,13 +13,8 @@ Adding a plugin and Developing sections are the procedure; this file holds only 
 
 ## Verification gate (before every commit)
 
-- The README's two commands. `claude plugin validate .` checks the marketplace and the manifests
-  only: it passed a hooks module with a syntax error (checked 2026-10-17), so the module is
-  checked by `claude plugin test plugins/<name>`, run for every plugin the change touches.
-- `npx -p typescript tsc --noEmit -p plugins/<name>`. Each plugin's `tsconfig.json` extends
-  `./.claude-plugin/types/tsconfig.json`, gitignored and written by the engine the first time the
-  plugin is loaded in an interactive `claude --plugin-dir plugins/<name>`; `claude plugin test`
-  and a headless `claude -p` load do not write it. All three plugins pass (2026-10-17).
+- The three commands in the README's "Adding a plugin" steps 3 and 4 (validate, the tests of every
+  plugin the change touches, tsc after one interactive load), as the README states them.
 - The hooks in `.claude/settings.json` run part of this unasked. A PostToolUse hook records which
   plugins the session edits (a Bash command naming `plugins/`, the marketplace or the README
   counts as all of them); the Stop hook then runs the id check below over every plugin, `validate`,

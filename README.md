@@ -4,15 +4,16 @@ A marketplace of [Claude Code](https://claude.com/claude-code) plugins: live UI 
 
 ## Install
 
-From the prompt of a terminal Claude Code session:
+From the prompt of a terminal Claude Code session, with `<plugin>` one of the names in the table
+below:
 
 ```
-/plugin install context-bar --marketplace penso-technology/claude-plugins
+/plugin install <plugin> --marketplace penso-technology/claude-plugins
 ```
 
 Answer `y` to add the marketplace the first time, then pick a scope (`user` loads it in every
 session). The plugin is active at once and in each session started afterwards. Later versions
-arrive with `claude plugin update context-bar` followed by `/reload-plugins`.
+arrive with `claude plugin update <plugin>` followed by `/reload-plugins`.
 
 ## Plugins
 
@@ -31,17 +32,23 @@ plugins/<name>/                   one plugin per folder
   hooks/hooks.json                { "modules": ["./register.tsx"] }
   hooks/register.tsx              the hooks module (.ts where it draws nothing)
   types/index.d.ts                the plugin's $.state contract, when it keeps state
-  tests/*.test.tsx                run by `claude plugin test`
+  tests/*.test.tsx                run by `claude plugin test` (.ts where the module is .ts)
+  tsconfig.json                   { "extends": "./.claude-plugin/types/tsconfig.json" }
+  README.md                       what it does, its contract if any, its limits, its install line
 ```
 
 ## Adding a plugin
 
 1. Create `plugins/<name>/` with the files above; `name` in `plugin.json` is the install name.
 2. Add an entry to `.claude-plugin/marketplace.json` with `"source": "./plugins/<name>"`.
-3. `claude plugin validate .` reads the marketplace, the manifest and the hooks module in one run;
-   `claude plugin test plugins/<name>` runs its tests.
-4. Add the plugin to the table above.
-5. Bump `version` in `plugin.json` on every change you want installers to receive.
+3. `claude plugin validate .` checks the marketplace and the manifests; it does not load the
+   hooks module, so a module that does not compile still passes it. `claude plugin test
+   plugins/<name>` loads the module and runs its tests, and is what catches that.
+4. `npx -p typescript tsc --noEmit -p plugins/<name>` type-checks the module. It needs the
+   engine-written `plugins/<name>/.claude-plugin/types/` (see Developing), so run it after the
+   plugin has been loaded once.
+5. Add the plugin to the table above.
+6. Bump `version` in `plugin.json` on every change you want installers to receive.
 
 ## Developing
 
@@ -51,7 +58,17 @@ Run a plugin from its folder without installing it:
 claude --plugin-dir plugins/<name>
 ```
 
-The folder is watched: saving a file hot-reloads the hooks module in that session.
+The folder is watched: saving a file hot-reloads the hooks module in that session. That first
+interactive load also writes `plugins/<name>/.claude-plugin/types/` (gitignored), the `claude-code`
+type declarations and the `tsconfig.json` the plugin's own extends; `claude plugin test` and a
+headless `claude -p` load do not write it, so editor type information and the `tsc` step both wait
+for one such load.
+
+A Claude Code session opened in this repo gets the hooks in `.claude/settings.json`: at the end of
+a turn that edited a plugin, they check the plugin's id across its folder, manifest, marketplace
+entry, state key and table row, run `claude plugin validate .`, and run the tests of the plugins
+the session touched. `/new-plugin <name>` scaffolds a plugin in the shape above and registers it;
+`/release <version>` cuts a release to `main`. CLAUDE.md states what else the tooling assumes.
 
 ## License
 
