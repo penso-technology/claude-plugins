@@ -70,6 +70,7 @@ restore
 record Write "{\"file_path\":\"$S/plugins/model-limits/hooks/register.ts\"}"; assert_eq "record: absolute path under plugins/<id>" "$(marker)" "model-limits"
 record Edit "{\"file_path\":\"$S/CLAUDE.md\"}"; assert_eq "record: a file outside plugins/ adds nothing" "$(marker)" "model-limits"
 record Bash '{"command":"git status"}'; assert_eq "record: a Bash command not naming plugins adds nothing" "$(marker)" "model-limits"
+record Bash '{"command":"cd /Users/me/claude-plugins && git status"}'; assert_eq "record: the checkout path alone (claude-plugins/) adds nothing" "$(marker)" "model-limits"
 record Bash '{"command":"sed -i s/a/b/ plugins/context-bar/hooks/register.tsx"}'; assert_eq "record: a Bash command naming plugins/ marks every plugin" "$(marker)" "* model-limits"
 rm -f "$MARKER"
 CLAUDE_PROJECT_DIR="$S/" record Edit '{"file_path":"plugins/agent-model-label/types/index.d.ts"}'; assert_eq "record: relative path with a trailing-slash project dir" "$(marker)" "agent-model-label"

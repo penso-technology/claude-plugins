@@ -24,9 +24,9 @@ relative_to_root() {
 
 case "$(jq -r '.tool_name // empty' <<<"$INPUT")" in
   Bash)
-    case "$(jq -r '.tool_input.command // empty' <<<"$INPUT")" in
-      *plugins/*|*marketplace.json*|*README.md*) mark '*' ;;
-    esac ;;
+    # `plugins/` as a path segment of its own: the checkout is itself named claude-plugins/.
+    jq -r '.tool_input.command // empty' <<<"$INPUT" \
+      | grep -qE '(^|[^A-Za-z0-9_.-])plugins/|marketplace\.json|README\.md' && mark '*' ;;
   *)
     file="$(jq -r '.tool_response.filePath // .tool_input.file_path // empty' <<<"$INPUT")"
     [ -n "$file" ] || exit 0
